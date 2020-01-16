@@ -1,9 +1,17 @@
+const headingImages = document.querySelectorAll('.header *');
+let headingTimer = .4;
+headingImages.forEach(item => {
+  gsap.from(item, {opacity: 0, duration: 1, delay: headingTimer})
+  headingTimer = headingTimer + headingTimer/2;
+});
+
+
+
 /* Step 1: using axios, send a GET request to the following URL 
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
 const entry = document.querySelector('.cards');
-
 axios.get('https://api.github.com/users/liampmoore')
 .then(response => {entry.append(cardMaker(response.data))})
 .catch(error => {console.log(error)})
@@ -31,8 +39,9 @@ axios.get('https://api.github.com/users/liampmoore')
 axios.get('https://api.github.com/users/liampmoore/followers')
 .then(response => {response.data.forEach(item => {
   axios.get(item.url)
-  .then(response => { 
-    entry.append(cardMaker(response.data))
+  .then(response => {
+    const newCard = cardMaker(response.data);
+    entry.append(newCard);
     })
   .catch(error => {console.log(error)})
   }
@@ -96,7 +105,7 @@ let entryTimer = 0;
           card.append(cardImage, cardInfo);
           cardInfo.append(cardName, cardUsername, cardLocation, cardProfile, cardFollowers, cardFollowing);
 
-          gsap.from(card, {x: -200, duration: .8, delay: entryTimer})
+          gsap.from(card, {opacity: 0, y: window.innerHeight, duration: .8, delay: headingTimer + entryTimer})
           entryTimer = entryTimer + .1;
 
           return card;
