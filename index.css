@@ -93,12 +93,13 @@ body {
 
 .card {
   width: 100%;
-  padding: 20px;
+  padding: 35px 20px;
   display: flex;
   border-radius: 5px;
   box-shadow: 0 1px 6px -2px #000;
   background-color: #FFF;
   margin-bottom: 30px;
+  box-sizing: border-box;
 }
 
 .card img {
@@ -126,3 +127,26 @@ body {
 
 
 
+@media (max-width: 500px) {
+
+  .header img {
+    width: 25%;
+    height: auto;
+  }
+
+  .card {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card img {
+    width: 90%;
+    height: auto;
+    margin: 0;
+  }
+
+  .card .card-info {
+    width: 90%;
+    margin-top: 20px;
+  }
+}
